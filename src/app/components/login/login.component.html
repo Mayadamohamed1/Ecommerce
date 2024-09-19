@@ -1,0 +1,58 @@
+<section class="bg-main-light shadow p-3 my-3 rounded-4">
+  <h1 class="h2 text-main">login Now:</h1>
+  <form [formGroup]="loginGroup" (ngSubmit)="regiterSubmit()">
+
+
+    <div class="my-2">
+      <label for="email">email</label>
+      <input [ngClass]="{
+        'is-valid':!loginGroup.get('email')?.errors && (loginGroup.get('email')?.touched || loginGroup.get('email')?.dirty),
+        'is-invalid': loginGroup.get('email')?.errors && (loginGroup.get('email')?.touched || loginGroup.get('email')?.dirty),
+      }"
+       id="email" type="email" class="form-control" formControlName="email">
+   @if (loginGroup.get('email')?.errors && (loginGroup.get('email')?.touched || loginGroup.get('email')?.dirty)) {
+    <div class="alert alert-danger w-50">
+      @if (loginGroup.get('email')?.getError('required')) {
+        <p class="m-0">Email Is Required</p>
+      }
+      @else if (loginGroup.get('email')?.getError('email')) {<p class="m-0">Enter Valid Email </p>}
+    </div>
+   }
+    </div>
+
+
+    <div class="my-2">
+      <label for="pass">password</label>
+      <input [ngClass]="{
+        'is-valid': !loginGroup.get('password')?.errors && (loginGroup.get('password')?.touched || loginGroup.get('password')?.dirty),
+        'is-invalid':loginGroup.get('password')?.errors && (loginGroup.get('password')?.touched || loginGroup.get('password')?.dirty),
+      }"
+       id="pass" type="password" class="form-control" formControlName="password">
+      @if (loginGroup.get('password')?.errors && (loginGroup.get('password')?.touched || loginGroup.get('password')?.dirty)) {
+        <div class="alert alert-danger w-50">
+          @if (loginGroup.get('password')?.getError('required')) {
+            <p class="m-0">password Is Required</p>
+          }
+          @else if (loginGroup.get('password')?.getError('pattern')) {<p class="m-0">password must start with upperCase then from 6 to more any chars  </p>}
+        </div>
+      }
+    </div>
+
+<div class="d-flex align-items-center justify-content-end gap-4">
+  <a routerLink="/forgot" class="link-primary">Forgot password?</a>
+    <button
+     class="btn-main">login
+      @if (isLoading) {
+        <span><i class="fa fa-spinner fa-spin"></i></span>
+      }
+    </button>
+</div>
+    @if (msgError) {
+      <p class="alert alert-danger">{{msgError}}</p>
+    }
+    @if(msgSuccess){
+      <p class="text-center my-2 alert alert-success">Success...waiting 2s</p>
+    }
+  </form>
+
+</section>

@@ -1,0 +1,37 @@
+<div class="accordion" id="accordionExample">
+  @for (item of dataOrder; track $index) {
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="heading{{item.id}}">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+         <span>Order Number: {{item.id}}</span>
+        </button>
+      </h2>
+      <div id="collapse{{item.id}}" class="accordion-collapse collapse show" [attr.aria-labelledby]="'heading'+ item.id" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          @for (item of item.cartItems; track item.product._id) {
+            <div class="row mb-1 border-bottom">
+              <div class="col-md-1">
+          <div>
+            <img [src]="item.product.imageCover" class="w-100" [alt]="item.product.title">
+          </div>
+              </div>
+              <div class="col-md-11 d-flex justify-content-between align-items-center">
+                <div>
+                  <h3 class="h4">{{item.product.title}}</h3>
+                  <p class="text-main m-0">{{item.price | currency}}</p>
+                  <p class="text-main m-0"> count: {{item.count}}</p>
+
+                </div>
+
+              </div>
+            </div>
+          }
+
+        </div>
+      </div>
+    </div>
+
+  }
+
+
+</div>

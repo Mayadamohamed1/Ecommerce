@@ -1,0 +1,17 @@
+<section class="my-2">
+  <h2>{{"Categories.All Categories"| translate}}</h2>
+
+<div class="row">
+  @for (cate of allCategorise ; track cate._id) {
+    <!-- content -->
+
+    <div class="col-md-3">
+      <div [routerLink]="['/detailsCategories', cate._id]">
+        <img [src]="cate.image" class="w-100" height="300px" [alt]="cate.name" />
+        <h3 class="h6 text-main">{{ cate.name }}</h3>
+      </div>
+    </div>
+
+    }
+</div>
+</section>

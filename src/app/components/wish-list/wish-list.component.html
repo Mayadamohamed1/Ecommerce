@@ -1,0 +1,33 @@
+<section class="bg-main-light rounded-4 p-4 my-2 shadow w-75 mx-auto">
+
+  <div class="row gy-3">
+    @for (wish of wishDetalis ; track wish._id) {
+      <div class="col-md-4">
+        <div class="product p-2">
+         <div>
+          <img [src]="wish.imageCover" class="w-100" [alt]="wish.title">
+          <h6 class="text-main small">{{wish.category.name}}</h6>
+          <h5 class="fw-bold">{{wish.title|termText:2}}</h5>
+          <div class="d-flex justify-content-between align-items-center">
+            <span>{{wish.price}} EGP</span>
+
+<div class="d-flex justify-content-between">
+  @for (num of [1,2,3,4,5].slice(0, wish.ratingsAverage); track $index) {
+    <span> <i class="fa-solid fa-star rating-color"></i></span>
+  }
+  <span class="text-muted">{{wish.ratingsAverage}}</span>
+</div>
+
+          </div>
+         </div>
+         <div class="d-flex justify-content-between align-items-center">
+          <button class="btn bg-main text-white my-2" (click)="addCart(wish._id)"> Add To Cart</button>
+          <button (click)="removeItem(wish._id)" class="text-danger btn p-0 border-0"><i class="fa-solid fa-trash fa-2x"></i></button>
+         </div>
+
+        </div>
+      </div>
+    }
+  </div>
+  <!-- <button [routerLink]="['/orders',wishDetalis._id]" class="btn-main mt-2">Orders</button> -->
+  </section>

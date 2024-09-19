@@ -1,0 +1,99 @@
+<section class="bg-main-light shadow p-2 my-3 rounded-4">
+  <h1 class="h2 text-main">Register Now:</h1>
+  <form [formGroup]="registerGroup" (ngSubmit)="regiterSubmit()">
+    <div class="my-2">
+      <label for="name">name</label>
+      <input [ngClass]="{
+        'is-valid': !registerGroup.get('name')?.errors && (registerGroup.get('name')?.touched || registerGroup.get('name')?.dirty),
+        'is-invalid': registerGroup.get('name')?.errors && (registerGroup.get('name')?.touched || registerGroup.get('name')?.dirty)
+      }"
+
+       id="name" type="text" class="form-control" formControlName="name">
+     @if (registerGroup.get('name')?.errors && (registerGroup.get('name')?.touched || registerGroup.get('name')?.dirty)) {
+      <div class="alert alert-danger w-50">
+        @if (registerGroup.get('name')?.getError('required')) {
+          <p class="m-0">Name Is Required</p>
+        }
+        @else if (registerGroup.get('name')?.getError('minlength')) {<p class="m-0">Name Should be more than or equal  3 chars</p>}
+       @else if (registerGroup.get('name')?.getError('maxlength') ){ <p class="m-0">Name Should be less than or equal  20 chars</p>}
+      </div>
+     }
+    </div>
+
+    <div class="my-2">
+      <label for="email">email</label>
+      <input [ngClass]="{
+        'is-valid':!registerGroup.get('email')?.errors && (registerGroup.get('email')?.touched || registerGroup.get('email')?.dirty),
+        'is-invalid': registerGroup.get('email')?.errors && (registerGroup.get('email')?.touched || registerGroup.get('email')?.dirty),
+      }"
+       id="email" type="email" class="form-control" formControlName="email">
+   @if (registerGroup.get('email')?.errors && (registerGroup.get('email')?.touched || registerGroup.get('email')?.dirty)) {
+    <div class="alert alert-danger w-50">
+      @if (registerGroup.get('email')?.getError('required')) {
+        <p class="m-0">Email Is Required</p>
+      }
+      @else if (registerGroup.get('email')?.getError('email')) {<p class="m-0">Enter Valid Email </p>}
+    </div>
+   }
+    </div>
+
+    <div class="my-2">
+      <label for="phone">phone</label>
+      <input [ngClass]="{
+        'is-valid': !registerGroup.get('phone')?.errors && (registerGroup.get('phone')?.touched || registerGroup.get('phone')?.dirty),
+        'is-invalid': registerGroup.get('phone')?.errors && (registerGroup.get('phone')?.touched || registerGroup.get('phone')?.dirty),
+      }"
+       id="phone" type="tel" class="form-control" formControlName="phone">
+      @if (registerGroup.get('phone')?.errors && (registerGroup.get('phone')?.touched || registerGroup.get('phone')?.dirty)) {
+        <div class="alert alert-danger w-50">
+          @if (registerGroup.get('phone')?.getError('required')) {
+            <p class="m-0">PhoneIs Required</p>
+          }
+          @else if (registerGroup.get('phone')?.getError('pattern')) {<p class="m-0">Eaccept only egypt phone numbers </p>}
+        </div>
+       }
+    </div>
+
+    <div class="my-2">
+      <label for="pass">password</label>
+      <input [ngClass]="{
+        'is-valid': !registerGroup.get('password')?.errors && (registerGroup.get('password')?.touched || registerGroup.get('password')?.dirty),
+        'is-invalid':registerGroup.get('password')?.errors && (registerGroup.get('password')?.touched || registerGroup.get('password')?.dirty),
+      }"
+       id="pass" type="password" class="form-control" formControlName="password">
+      @if (registerGroup.get('password')?.errors && (registerGroup.get('password')?.touched || registerGroup.get('password')?.dirty)) {
+        <div class="alert alert-danger w-50">
+          @if (registerGroup.get('password')?.getError('required')) {
+            <p class="m-0">password Is Required</p>
+          }
+          @else if (registerGroup.get('password')?.getError('pattern')) {<p class="m-0">password must start with upperCase then from 6 to more any chars  </p>}
+        </div>
+      }
+    </div>
+
+    <div class="my-2">
+      <label for="repass">rePassword</label>
+      <input [ngClass]="{
+        'is-valid': !registerGroup.get('rePassword')?.errors && (registerGroup.get('rePassword')?.touched || registerGroup.get('rePassword')?.dirty),
+        'is-invalid':registerGroup.get('rePassword')?.errors && (registerGroup.get('rePassword')?.touched || registerGroup.get('rePassword')?.dirty),
+      }"
+       id="repass" type="password" class="form-control" formControlName="rePassword">
+    @if (registerGroup.getError('mismatch')&& (registerGroup.get('rePassword')?.touched || registerGroup.get('rePassword')?.dirty)) {
+      <p class=" alert alert-danger m-0 w-50">Password confirmation is incorrect</p>
+    }
+    </div>
+    <button
+     class="btn-main ms-auto d-block">Register
+      @if (isLoading) {
+        <span><i class="fa fa-spinner fa-spin"></i></span>
+      }
+    </button>
+    @if (msgError) {
+      <p class="alert alert-danger">{{msgError}}</p>
+    }
+    @if(msgSuccess){
+      <p class="text-center my-2 alert alert-success">Success...waiting 2s</p>
+    }
+  </form>
+
+</section>
