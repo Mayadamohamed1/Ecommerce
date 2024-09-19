@@ -1,0 +1,17 @@
+{
+  "navbar":{
+"Home":"الرئيسيه",
+"Products":"المنتجات",
+"Categories":"الاقسام",
+"Brands":"العلامات التجاريه",
+"LogOut":"تسجيل الخروج",
+"Lang":"غ"
+  },
+  "Home":{
+"Popular Categories": "الفئات المشهورة",
+  "Popular Products": "المنتجات المشهورة"
+  },
+  "Categories":{
+    "All Categories":"كل الفئات:"
+  }
+}
